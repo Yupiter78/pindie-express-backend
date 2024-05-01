@@ -3,9 +3,12 @@ const bodyParser = require("body-parser");
 const { cors } = require("./middlewares/cors");
 const mainRoute = require("./routes/main");
 const path = require("path");
+const connectToDatabase = require("./database/connect");
 
 const app = express();
 const PORT = 3000;
+
+connectToDatabase();
 
 app.use(
     cors,
