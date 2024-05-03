@@ -23,6 +23,7 @@ const createGame = async (req, res, next) => {
 };
 
 const findGameById = async (req, res, next) => {
+    console.log("GET /games/:id");
     try {
         req.game = await games.findById(req.params.id);
         next();
