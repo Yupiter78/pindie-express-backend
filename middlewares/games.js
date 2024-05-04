@@ -94,6 +94,19 @@ const checkIfUsersAreSafe = async (req, res, next) => {
     }
 };
 
+const checkIsGameExists = async (req, res, next) => {
+    const isInArray = req.gamesArray.find(
+        (game) => req.body.title === game.title
+    );
+    if (isInArray) {
+        res.status(400).json({
+            message: "Игра с таким названием уже существует"
+        });
+    } else {
+        next();
+    }
+};
+
 module.exports = {
     findAllGames,
     createGame,
@@ -102,5 +115,6 @@ module.exports = {
     deleteGame,
     checkEmptyFields,
     checkIfCategoriesAvaliable,
-    checkIfUsersAreSafe
+    checkIfUsersAreSafe,
+    checkIsGameExists
 };

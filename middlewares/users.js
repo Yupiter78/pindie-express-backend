@@ -50,10 +50,43 @@ deleteUser = async (req, res, next) => {
     }
 };
 
+const checkIsUserExists = async (req, res, next) => {
+    const isInArray = req.usersArray.find(
+        (user) => user.email === req.body.email
+    );
+    if (isInArray) {
+        res.status(400).json({
+            message: "Пользователь с таким email уже существует"
+        });
+    } else {
+        next();
+    }
+};
+
+const checkEmptyNameAndEmailAndPassword = async (req, res, next) => {
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+        res.status(400).json({ message: "Введите имя, email и пароль" });
+    } else {
+        next();
+    }
+};
+const checkEmptyNameAndEmail = async (req, res, next) => {
+    const { username, email } = req.body;
+    if (!username || !email) {
+        res.status(400).json({ message: "Введите имя и email" });
+    } else {
+        next();
+    }
+};
+
 module.exports = {
     findAllUsers,
     createUser,
     findUserById,
     updateUser,
-    deleteUser
+    deleteUser,
+    checkEmptyNameAndEmailAndPassword,
+    checkEmptyNameAndEmail,
+    checkIsUserExists
 };

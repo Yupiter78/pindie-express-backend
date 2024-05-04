@@ -7,7 +7,8 @@ const {
     deleteGame,
     checkEmptyFields,
     checkIfUsersAreSafe,
-    checkIfCategoriesAvaliable
+    checkIfCategoriesAvaliable,
+    checkIsGameExists
 } = require("../middlewares/games");
 const {
     sendAllGames,
@@ -22,6 +23,8 @@ gamesRouter.get("/games/:id", findGameById, sendGameById);
 gamesRouter.post(
     "/games",
     findAllGames,
+    checkIsGameExists,
+    checkIfCategoriesAvaliable,
     checkEmptyFields,
     createGame,
     sendGameCreated
