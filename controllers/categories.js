@@ -17,9 +17,14 @@ const sendCategoryUpdated = (req, res) => {
     res.json({ message: "Категория обновлена" });
 };
 
+const sendCategoryDeleted = (req, res) => {
+    res.json(req.category);
+};
+
 module.exports = {
     sendAllCategories,
     sendCategoryCreated,
     sendCategoryById,
-    sendCategoryUpdated
+    sendCategoryUpdated,
+    sendCategoryDeleted
 };

@@ -18,9 +18,14 @@ const sendGameUpdated = (req, res) => {
     res.status(200).send(JSON.stringify({ message: "Игра обновлена" }));
 };
 
+const sendGameDeleted = (req, res) => {
+    res.json(req.game);
+};
+
 module.exports = {
     sendAllGames,
     sendGameCreated,
     sendGameById,
-    sendGameUpdated
+    sendGameUpdated,
+    sendGameDeleted
 };

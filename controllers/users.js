@@ -17,9 +17,14 @@ const sendUserUpdated = (req, res) => {
     res.json({ message: "Пользователь обновлён" });
 };
 
+const sendUserDeleted = (req, res) => {
+    res.json(req.user);
+};
+
 module.exports = {
     sendAllUsers,
     sendUserCreated,
     sendUserById,
-    sendUserUpdated
+    sendUserUpdated,
+    sendUserDeleted
 };
