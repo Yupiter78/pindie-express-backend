@@ -39,4 +39,16 @@ const findGameById = async (req, res, next) => {
     }
 };
 
-module.exports = { findAllGames, createGame, findGameById };
+const updateGame = async (req, res, next) => {
+    try {
+        req.game = await games.findByIdAndUpdate(req.params.id, req.body);
+        next();
+    } catch (error) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(400).send(
+            JSON.stringify({ message: "Ошибка обновления игры" })
+        );
+    }
+};
+
+module.exports = { findAllGames, createGame, findGameById, updateGame };

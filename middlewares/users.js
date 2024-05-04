@@ -32,4 +32,13 @@ const findUserById = async (req, res, next) => {
     }
 };
 
-module.exports = { findAllUsers, createUser, findUserById };
+const updateUser = async (req, res, next) => {
+    try {
+        req.user = await users.findByIdAndUpdate(req.params.id, req.body);
+        next();
+    } catch (error) {
+        res.status(400).json({ message: "Ошибка обновления пользователя" });
+    }
+};
+
+module.exports = { findAllUsers, createUser, findUserById, updateUser };

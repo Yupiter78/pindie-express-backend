@@ -13,4 +13,13 @@ const sendCategoryById = (req, res) => {
     res.end(JSON.stringify(req.category));
 };
 
-module.exports = { sendAllCategories, sendCategoryCreated, sendCategoryById };
+const sendCategoryUpdated = (req, res) => {
+    res.json({ message: "Категория обновлена" });
+};
+
+module.exports = {
+    sendAllCategories,
+    sendCategoryCreated,
+    sendCategoryById,
+    sendCategoryUpdated
+};
