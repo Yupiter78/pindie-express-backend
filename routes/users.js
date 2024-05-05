@@ -28,11 +28,11 @@ usersRouter.post(
     sendAllUsers
 );
 usersRouter.put(
-    "users/:id",
+    "/users/:id",
     checkEmptyNameAndEmail,
     updateUser,
     sendUserUpdated
 );
-usersRouter.delete("users/:id", deleteUser, sendUserDeleted);
+usersRouter.delete("/users/:id", deleteUser, sendUserDeleted);
 
 module.exports = usersRouter;

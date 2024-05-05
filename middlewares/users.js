@@ -41,9 +41,9 @@ const updateUser = async (req, res, next) => {
     }
 };
 
-deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res, next) => {
     try {
-        req.user = users.findByIdAndDelete(req.params.id);
+        req.user = await users.findByIdAndDelete(req.params.id);
         next();
     } catch (error) {
         res.status(400).json({ message: "Ошибка удаления пользователя" });
