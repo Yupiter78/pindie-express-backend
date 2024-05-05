@@ -1,13 +1,13 @@
 const categories = require("../models/category");
 
 const findAllCategories = async (req, res, next) => {
-    console.log("GET /categories");
+    console.log("GET /api/categories");
     req.categoriesArray = await categories.find({});
     next();
 };
 
 const createCategory = async (req, res, next) => {
-    console.log("POST /categories");
+    console.log("POST /api/categories");
     try {
         console.log("req.body: ", req.body);
         req.category = await categories.create(req.body);
@@ -21,7 +21,7 @@ const createCategory = async (req, res, next) => {
 };
 
 const findCategoryById = async (req, res, next) => {
-    console.log("GET /categories/:id");
+    console.log("GET /api/categories/:id");
     try {
         req.category = await categories.findById(req.params.id);
         next();
