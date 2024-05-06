@@ -83,9 +83,12 @@ const checkEmptyNameAndEmail = async (req, res, next) => {
 };
 
 const hashPassword = async (req, res, next) => {
+    console.log("HASH_PASSWORD");
     try {
+        console.log("req.body.password: ", req.body.password);
         const salt = await bcrypt.genSalt(10);
         req.body.password = await bcrypt.hash(req.body.password, salt);
+        console.log("req.body.password__2: ", req.body.password);
         next();
     } catch (error) {
         res.status(400).json({ message: "Ошибка хеширования пароля" });
