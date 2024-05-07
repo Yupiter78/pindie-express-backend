@@ -1,14 +1,9 @@
 const users = require("../models/user");
-const bcrypt = require("bcryptjs");
 
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await users.findOne({ email });
-        const matched = await bcrypt.compare(password, user.password);
-        if (!user || !matched) {
-            throw new Error("Неправильная почта или пароль");
-        }
+        const user = await users.findUserByCredentials(email, password);
 
         res.json({
             _id: user._id,
