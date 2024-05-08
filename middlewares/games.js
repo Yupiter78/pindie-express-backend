@@ -1,11 +1,19 @@
 const games = require("../models/game");
 
 const findAllGames = async (req, res, next) => {
-    req.gamesArray = await games
-        .find({})
-        .populate("categories")
-        .populate({ path: "users", select: "-password" });
-    next();
+    try {
+        const { "categories.name": category } = req.query;
+        req.gamesArray = category
+            ? await games.findGameByCategory(category)
+            : await games
+                  .find({})
+                  .populate("categories")
+                  .populate({ path: "users", select: "-password" });
+
+        next();
+    } catch (error) {
+        next(error);
+    }
 };
 
 const createGame = async (req, res, next) => {
