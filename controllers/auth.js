@@ -31,7 +31,7 @@ const sendIndex = (req, res) => {
     if (req.cookies.jwt) {
         try {
             jwt.verify(req.cookies.jwt, "some-secret-key");
-            return sendDashboard();
+            return res.redirect("/admin/dashboard");
         } catch (error) {
             sendIndexPage();
         }
@@ -39,4 +39,4 @@ const sendIndex = (req, res) => {
     sendIndexPage();
 };
 
-module.exports = { login, sendIndex };
+module.exports = { login, sendIndex, sendDashboard };
