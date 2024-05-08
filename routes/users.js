@@ -15,16 +15,20 @@ const {
     sendAllUsers,
     sendUserById,
     sendUserUpdated,
-    sendUserDeleted
+    sendUserDeleted,
+    sendMe
 } = require("../controllers/users");
+const { checkAuth } = require("../middlewares/auth");
 
 usersRouter.get("/users", findAllUsers, sendAllUsers);
 usersRouter.get("/users/:id", findUserById, sendUserById);
+usersRouter.get("/me", checkAuth, sendMe);
 usersRouter.post(
     "/users",
     findAllUsers,
     checkIsUserExists,
     checkEmptyNameAndEmailAndPassword,
+    checkAuth,
     hashPassword,
     createUser,
     sendAllUsers
@@ -32,9 +36,10 @@ usersRouter.post(
 usersRouter.put(
     "/users/:id",
     checkEmptyNameAndEmail,
+    checkAuth,
     updateUser,
     sendUserUpdated
 );
-usersRouter.delete("/users/:id", deleteUser, sendUserDeleted);
+usersRouter.delete("/users/:id", checkAuth, deleteUser, sendUserDeleted);
 
 module.exports = usersRouter;

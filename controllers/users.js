@@ -21,10 +21,15 @@ const sendUserDeleted = (req, res) => {
     res.json(req.user);
 };
 
+const sendMe = (req, res) => {
+    res.json(req.user);
+};
+
 module.exports = {
     sendAllUsers,
     sendUserCreated,
     sendUserById,
     sendUserUpdated,
-    sendUserDeleted
+    sendUserDeleted,
+    sendMe
 };
