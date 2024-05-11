@@ -69,6 +69,10 @@ const deleteGame = async (req, res, next) => {
 };
 
 const checkEmptyFields = async (req, res, next) => {
+    if(req.isVoteRequest) {
+        next();
+        return;
+    }
     const { title, description, image, link, developer } = req.body;
     if (!title || !description || !image || !link || !developer) {
         res.status(400).json({ message: "Заполните все поля!" });
@@ -78,6 +82,11 @@ const checkEmptyFields = async (req, res, next) => {
 };
 
 const checkIfCategoriesAvaliable = async (req, res, next) => {
+    if(req.isVoteRequest) {
+        next();
+        return;
+    }
+
     const { categories } = req.body;
     if (!categories || categories.length === 0) {
         res.status(400).json({ message: "Выберите хотя бы одну категрию" });
@@ -115,6 +124,13 @@ const checkIsGameExists = async (req, res, next) => {
     }
 };
 
+const checkIsVoteRequest = async (req, res, next) => {
+    if (Object.keys(req.body).length === 1 && req.body.users) {
+        req.isVoteRequest = true;
+    }
+    next();
+};
+
 module.exports = {
     findAllGames,
     createGame,
@@ -124,5 +140,6 @@ module.exports = {
     checkEmptyFields,
     checkIfCategoriesAvaliable,
     checkIfUsersAreSafe,
-    checkIsGameExists
+    checkIsGameExists,
+    checkIsVoteRequest
 };

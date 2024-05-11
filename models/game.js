@@ -38,7 +38,7 @@ const gameSchema = new mongoose.Schema({
     ]
 });
 
-gameSchema.statics.findGameByCategories = async function (category) {
+gameSchema.statics.findGameByCategory = async function (category) {
     try {
         const games = await this.find({})
             .populate({
