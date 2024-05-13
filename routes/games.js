@@ -8,7 +8,8 @@ const {
     checkEmptyFields,
     checkIfUsersAreSafe,
     checkIfCategoriesAvaliable,
-    checkIsGameExists, checkIsVoteRequest
+    checkIsGameExists,
+    checkIsVoteRequest
 } = require("../middlewares/games");
 const {
     sendAllGames,
